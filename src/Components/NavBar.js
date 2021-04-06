@@ -35,7 +35,6 @@ const User = styled.div`
     flex-direction: column;
 `;
 const Button = styled.button`
-    font-family: Roboto;
     font-size: 13px;
     line-height: 19px;
     text-transform: uppercase;
@@ -43,7 +42,6 @@ const Button = styled.button`
 	background: none;
 	border: 1px solid #299B01;
     color: #fff;
-    cursor: pointer;
     &:hover {
         border: 1px solid #fff;
     }
