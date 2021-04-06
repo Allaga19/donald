@@ -36,13 +36,17 @@ const User = styled.div`
 `;
 const Button = styled.button`
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 19px;
     text-transform: uppercase;
-    padding: 0;
+    padding: 2px 4px;
 	background: none;
-	border: none;
+	border: 1px solid #299B01;
     color: #fff;
+    cursor: pointer;
+    &:hover {
+        border: 1px solid #fff;
+    }
 }
 `;
 
