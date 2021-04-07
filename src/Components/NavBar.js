@@ -43,7 +43,6 @@ const Button = styled.button`
 	background: none;
 	border: 1px solid #299B01;
     color: #fff;
-    cursor: pointer;
     &:hover {
         border: 1px solid #fff;
     }
@@ -51,8 +50,8 @@ const Button = styled.button`
 `;
 
 const ButtonImg = styled.img`
-    width: 32px;
-    height: 32px;
+    width: 25px;
+    height: 25px;
     margin: 0 auto;
     margin-bottom: 3px;
 `;

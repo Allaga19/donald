@@ -20,6 +20,8 @@ export const GlobalStyle = createGlobalStyle`
 		max-width: 100%;
 		height: auto;
 	}
+	:focus,:active {outline: none;}
+	a:focus,a:active {outline: none;}
 	a {
 		text-decoration: none;
 		color: inherit;
@@ -40,6 +42,8 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	button {
 		cursor: pointer;
+		border: none;
+		transition: all 0.8s ease 0s;
 	}
 	input, button {
 		font-family: inherit;
