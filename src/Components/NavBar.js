@@ -49,8 +49,8 @@ const Button = styled.button`
 `;
 
 const ButtonImg = styled.img`
-    width: 32px;
-    height: 32px;
+    width: 25px;
+    height: 25px;
     margin: 0 auto;
     margin-bottom: 3px;
 `;
