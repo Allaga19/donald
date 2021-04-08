@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ModalBtn } from './Buttom';
+import { ModalBtn } from './Button';
 
 const Overlay = styled.div`
     position: fixed;
@@ -27,21 +27,25 @@ const Banner = styled.div`
     background-image: url(${({img}) => img});
     background-size: cover;
     background-position: center;
-    margin-bottom: 20px; 
 `;
-const ModalPrice = styled.div`
+const ModalContent = styled.div`
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 200px);
+`;
+const ContentHeader = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 240px;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: 'Pacifico', cursive;
 `;
 const PriceName = styled.p`
-    font-family: Pacifico;
-    font-size: 30px;
     margin-left: 30px
 `;
 const PriceNumber = styled.p`
-    font-family: Pacifico;
-    font-size: 30px;
     margin-right: 53px;
 `;
 
@@ -58,12 +62,14 @@ export const ModalItem = ({openItem, setOpenItem}) => {
     <Overlay id="overlay" onClick={closeModal}>
         <Modal>
             <Banner img={openItem.img}/>
-            <ModalPrice>
-                <PriceName>{openItem.name}</PriceName>
-                <PriceNumber>{openItem.price.toLocaleString('ru-RU',
-                {style: 'currency', currency: 'RUB'})}</PriceNumber>
-            </ModalPrice>
-            <ModalBtn>Добавить</ModalBtn>
+            <ModalContent>
+                <ContentHeader>
+                    <PriceName>{openItem.name}</PriceName>
+                    <PriceNumber>{openItem.price.toLocaleString('ru-RU',
+                    {style: 'currency', currency: 'RUB'})}</PriceNumber>
+                </ContentHeader>
+                <ModalBtn>Добавить</ModalBtn>
+            </ModalContent>
         </Modal>
     </Overlay>
    )

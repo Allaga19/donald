@@ -8,6 +8,7 @@ import { BannerMenu } from './Banner';
 const MenuStyled = styled.main`
     backgrount-color: #ccc;
     margin-top: 80px;
+    margin-left: 380px;
 `;
 
 const SectionMenu = styled.section`
