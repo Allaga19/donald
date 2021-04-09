@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import dbMenu from './DBMenu';
-import { ListItem } from './ListItem';
-import { BannerMenu } from './Banner';
+import dbMenu from '../DBMenu';
+import { ListItem } from '../Menu/ListItem';
+import { BannerMenu } from '../Menu/Banner';
 
 
 const MenuStyled = styled.main`
