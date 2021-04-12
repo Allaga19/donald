@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ModalBtn } from '../Style/Button';
+import { CountItem } from './CountItem';
+import { UseCount } from './../Hooks/UseCount';
+import { totalPriceItems } from '../Functions/secondaryFunction';
+import { formatCurrency } from '../Functions/secondaryFunction';
+
 
 const Overlay = styled.div`
     position: fixed;
@@ -49,7 +54,17 @@ const PriceNumber = styled.p`
     margin-right: 53px;
 `;
 
-export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
+const TotalPriceItem = styled.div`
+        display: flex;
+        justify-content: space-between;
+    `;
+
+// export const totalPriceItems = order => order.price * order.count;
+
+export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+
+    const counter = UseCount();
+
     // закрытие модального окна
     const closeModal = e => {
         if (e.target.id === 'overlay') {
@@ -58,7 +73,8 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
     };
 
     const order = {
-        ...openItem
+        ...openItem,
+        count: counter.count
     };
 
     const addToOrder = () => {
@@ -66,6 +82,7 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
         setOpenItem(null);
     };
 
+    
    return (
     <Overlay id="overlay" onClick={closeModal}>
         <Modal>
@@ -73,9 +90,13 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
             <ModalContent>
                 <ContentHeader>
                     <PriceName>{openItem.name}</PriceName>
-                    <PriceNumber>{openItem.price.toLocaleString('ru-RU',
-                    {style: 'currency', currency: 'RUB'})}</PriceNumber>
+                    <PriceNumber>{formatCurrency(openItem.price)}</PriceNumber>
                 </ContentHeader>
+                <CountItem {...counter}/>
+                <TotalPriceItem>
+                    <span>Цена:</span>
+                    <span>{formatCurrency(totalPriceItems(order))}</span>
+                </TotalPriceItem>
                 <ModalBtn onClick={addToOrder}>Добавить</ModalBtn>
             </ModalContent>
         </Modal>
