@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ModalBtn } from '../Style/Button';
 import { CountItem } from './CountItem';
-import { UseCount } from './../Hooks/UseCount';
+import { UseCount } from '../Hooks/UseCount';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { formatCurrency } from '../Functions/secondaryFunction';
 
@@ -55,11 +55,9 @@ const PriceNumber = styled.p`
 `;
 
 const TotalPriceItem = styled.div`
-        display: flex;
-        justify-content: space-between;
-    `;
-
-// export const totalPriceItems = order => order.price * order.count;
+    display: flex;
+    justify-content: space-between;
+`;
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
