@@ -8,11 +8,14 @@ const CountWrapper = styled.div`
 
 const CountInput = styled.input`
     width: 50px;
+    height: 23px;
     font-size: 20px;
 `;
 
 const ButtonCount = styled.button`
-    background-color: transparent;
+    background-color: #c4c4c4;
+    width: 23px;
+    height: 26px;
 `;
 
 export function CountItem({ count, setCount, onChange }) {

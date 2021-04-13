@@ -15,6 +15,7 @@ const ToppingLabel = styled.label`
 const ToppingCheckbox = styled.input`
     cursor: pointer;
     margin-right: 5px;
+    background: #ccc;
 `;
 
 export function Toppings({ toppings, cheсkToppings }) {
