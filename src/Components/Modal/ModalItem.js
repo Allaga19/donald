@@ -5,6 +5,8 @@ import { CountItem } from './CountItem';
 import { UseCount } from '../Hooks/UseCount';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { formatCurrency } from '../Functions/secondaryFunction';
+import { Toppings } from '../Modal/Toppings';
+import { useToppings } from '../Hooks/useToppings';
 
 
 const Overlay = styled.div`
@@ -62,6 +64,7 @@ const TotalPriceItem = styled.div`
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const counter = UseCount();
+    const toppings = useToppings(openItem);
 
     // закрытие модального окна
     const closeModal = e => {
@@ -69,10 +72,11 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
             setOpenItem(null);
         }
     };
-
+    // заказы
     const order = {
         ...openItem,
-        count: counter.count
+        count: counter.count,
+        topping: toppings.toppings
     };
 
     const addToOrder = () => {
@@ -91,6 +95,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                     <PriceNumber>{formatCurrency(openItem.price)}</PriceNumber>
                 </ContentHeader>
                 <CountItem {...counter}/>
+                {openItem.toppings && <Toppings {...toppings} />}
                 <TotalPriceItem>
                     <span>Цена:</span>
                     <span>{formatCurrency(totalPriceItems(order))}</span>
