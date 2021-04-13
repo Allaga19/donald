@@ -45,12 +45,4 @@ export function OrderListItem({order}) {
     ) 
   }
 
-// export const OrderListItem = ({ order }) => (
-//     <OrderItemStyled>
-//         <ItemName>{order.name}</ItemName>
-//         <span>{order.count}</span>
-//         <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
-//         <TrashButton/>
-//     </OrderItemStyled>
-// );
 
