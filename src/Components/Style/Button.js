@@ -19,4 +19,9 @@ export const ModalBtn = styled.button`
             opacity: 0;
         }
     }
+    &:disabled {
+        color: #ddd;
+        background-color: #ccc;
+        border-color: #aaa;
+    }
 `;
