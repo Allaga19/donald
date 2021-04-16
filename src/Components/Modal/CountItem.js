@@ -13,6 +13,7 @@ const CountInput = styled.input`
 
 const ButtonCount = styled.button`
     background-color: transparent;
+    border: 1px solid rgba(0,0,0, .7);
 `;
 
 export function CountItem({ count, setCount, onChange }) {
