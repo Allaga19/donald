@@ -10,7 +10,6 @@ import { Choices } from '../Modal/Choices';
 import { useToppings } from '../Hooks/useToppings';
 import { useChoices} from '../Hooks/useChoices';
 
-
 const Overlay = styled.div`
     position: fixed;
     display: flex;
@@ -57,15 +56,13 @@ const PriceName = styled.p`
 const PriceNumber = styled.p`
     margin-right: 53px;
 `;
-
 const TotalPriceItem = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
-    const counter = UseCount();
+    const counter = UseCount(openItem.count);
     const toppings = useToppings(openItem);
     const choices = useChoices(openItem);
     const isEdit = openItem.index > -1;
@@ -87,14 +84,12 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
         const newOrders = [ ...orders];
         newOrders[openItem.index] = order;
         setOrders(newOrders);
-    }
-
+        setOpenItem(null);
+    };
     const addToOrder = () => {
         setOrders([...orders, order]);
         setOpenItem(null);
     };
-
-    
    return (
     <Overlay id="overlay" onClick={closeModal}>
         <Modal>
@@ -114,7 +109,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                 <ModalBtn 
                     onClick={isEdit ? editOrder : addToOrder}
                     disabled={order.choices && !order.choice}
-                    >Добавить</ModalBtn>
+                    >{isEdit ? 'Редактировать' : 'Добавить'}</ModalBtn>
             </ModalContent>
         </Modal>
     </Overlay>
