@@ -6,5 +6,5 @@ export function UseCount(startCount) {
     // функция - обработчик события и будет запускать хук setCount
    const onChange = e => setCount(e.target.value);
 
-   return { count, setCount, onChange }
+   return { count, setCount, onChange };
 }

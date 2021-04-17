@@ -5,17 +5,14 @@ const CountWrapper = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
 const CountInput = styled.input`
     width: 50px;
     font-size: 20px;
 `;
-
 const ButtonCount = styled.button`
     background-color: transparent;
     border: 1px solid rgba(0,0,0, .7);
 `;
-
 export function CountItem({ count, setCount, onChange }) {
     return (
         <CountWrapper>
