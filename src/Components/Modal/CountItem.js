@@ -10,7 +10,7 @@ const CountInput = styled.input`
     font-size: 20px;
 `;
 const ButtonCount = styled.button`
-    background-color: transparent;
+    background-color: #f5f2f2;
     border: 1px solid rgba(0,0,0, .7);
 `;
 export function CountItem({ count, setCount, onChange }) {
