@@ -69,15 +69,14 @@ const Figcaption = styled.figcaption`
 `;
 export const NavBar = ({ authentication, logIn, logOut }) => (
     <NavBarStyled>
-        <Logo>
-            <ImgLogo src={logoImg} alt="logo"/>
-            <H1>MrDonald’s</H1>
-        </Logo>
+        <Logo><ImgLogo src={logoImg} alt="logo"/><H1>Mr Donald</H1></Logo>
         {authentication ? 
             <User>
                 <Figure>
                     <ButtonImg src={signImg} alt={authentication.displayName}/>
-                    <Figcaption>{authentication.displayName}</Figcaption>
+                    <Figcaption>
+                        {authentication.displayName}
+                    </Figcaption>
                 </Figure>
                 <LogOut title="Выйти" onClick={logOut}>x</LogOut>
             </User> :
