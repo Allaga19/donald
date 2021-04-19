@@ -25,16 +25,16 @@ const H1 = styled.h1`
     font-size: 24px;
     margin-left: 15px;
 `;
-
 const ImgLogo = styled.img`
     width: 50px;
 `;
-
-const User = styled.div`
-    display: flex;
-    flex-direction: column;
+const ButtonImg = styled.img`
+    width: 25px;
+    height: 25px;
+    margin: 0 auto;
+    margin-bottom: 3px;
 `;
-const Button = styled.button`
+const LogOut = styled.button`
     font-family: Roboto;
     font-size: 13px;
     line-height: 19px;
@@ -43,28 +43,48 @@ const Button = styled.button`
 	background: none;
 	border: 1px solid #299B01;
     color: #fff;
+    margin-right: 30px;
     &:hover {
         border: 1px solid #fff;
     }
-}
+`;
+const Login = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+const User = styled.div`
+    display: flex;
+    align-items: center;
+`;
+const Figure = styled.figure`
+    text-align: center;
+    margin: 0 30px;
+    cursor: pointer;
+`;
+const Figcaption = styled.figcaption`
+    font-size: 12px;
 `;
 
-const ButtonImg = styled.img`
-    width: 25px;
-    height: 25px;
-    margin: 0 auto;
-    margin-bottom: 3px;
-`;
-
-export const NavBar = () => (
+export const NavBar = ({ authentication, logIn, logOut }) => (
     <NavBarStyled>
         <Logo>
             <ImgLogo src={logoImg} alt="logo"/>
             <H1>MrDonald’s</H1>
         </Logo>
-        <User>
-            <ButtonImg src={signImg} alt="sign"/>
-            <Button>Войти</Button>
-        </User>
+        {authentication ? 
+            <User>
+                <Figure>
+                    <ButtonImg src={signImg} alt={authentication.displayName}/>
+                    <Figcaption>{authentication.displayName}</Figcaption>
+                </Figure>
+                <LogOut title="Выйти" onClick={logOut}>x</LogOut>
+            </User> :
+            <Login onClick={logIn}>
+                <Figure>
+                    <ButtonImg src={signImg} alt="Войти"/>
+                    <Figcaption>Войти</Figcaption>
+                </Figure>
+            </Login>
+        }
     </NavBarStyled>
 );
