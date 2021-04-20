@@ -45,7 +45,7 @@ export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
         .join(', ');
 
     const refDeleteButton = useRef(null);
-    console.log(refDeleteButton);
+    // console.log(refDeleteButton);
     return (
         <OrderItemStyled onClick={(e) => e.target !== refDeleteButton.current && setOpenItem({ ...order, index})}>
             <ItemName>{order.name} {order.choice}</ItemName>
