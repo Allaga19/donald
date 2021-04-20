@@ -93,8 +93,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
         setOrders([...orders, order]);
         setOpenItem(null);
     };
-    
-   return (
+    return (
         <Overlay id="overlay" onClick={closeModal}>
             <Modal>
                 <Banner img={openItem.img}/>
@@ -112,12 +111,36 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                     </TotalPriceItem>
                     <ModalBtn 
                         onClick={isEdit ? editOrder : addToOrder}
-                        disabled={order.choices && !order.choice}>
-                          {isEdit ? 'Редактировать' : 'Добавить'}
-                    </ModalBtn>
+                        disabled={order.choices && !order.choice}
+                        >{isEdit ? 'Редактировать' : 'Добавить'}</ModalBtn>
                 </ModalContent>
             </Modal>
         </Overlay>
     )
+    
+//    return (
+//         <Overlay id="overlay" onClick={closeModal}>
+//             <Modal>
+//                 <Banner img={openItem.img}/>
+//                 <ModalContent>
+//                     <ContentHeader>
+//                         <PriceName>{openItem.name}</PriceName>
+//                         <PriceNumber>{formatCurrency(openItem.price)}</PriceNumber>
+//                     </ContentHeader>
+//                     <CountItem {...counter}/>
+//                     {openItem.toppings && <Toppings {...toppings} />}
+//                     {openItem.choices && <Choices {...choices} openItem={openItem} />}
+//                     <TotalPriceItem>
+//                         <span>Цена:</span>
+//                         <span>{formatCurrency(totalPriceItems(order))}</span>
+//                     </TotalPriceItem>
+//                     <ModalBtn 
+//                         onClick={isEdit ? editOrder : addToOrder}
+//                         disabled={order.choices && !order.choice}
+//                         >{isEdit ? 'Редактировать' : 'Добавить'}</ModalBtn>
+//                 </ModalContent>
+//             </Modal>
+//         </Overlay>
+//     )
 }
    

@@ -4,6 +4,7 @@ import { ModalBtn } from '../Style/Button';
 import { OrderListItem } from './../Order/OrderListItem';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { formatCurrency } from '../Functions/secondaryFunction';
+import { projection } from '../Functions/secondaryFunction';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -22,15 +23,12 @@ const OrderTitle = styled.h2`
     text-transform: uppercase;
     margin-bottom: 30px;
 `;
-
 const OrderContent = styled.div`
     flex-grow: 1;
 `;
-
 const OrderList = styled.ul`
 
 `;
-
 const Total = styled.div`
     display: flex;
     margin: 0 35px 30px;
@@ -38,7 +36,6 @@ const Total = styled.div`
         flex-grow: 1;
     }
 `;
-
 const TotalPrice = styled.span`
     text-align: right;
     min-width: 65px;
@@ -48,17 +45,34 @@ const TotalPrice = styled.span`
 const EmptyList = styled.p`
     text-align: center;
 `;
+const rulesData = {
+    name: ['name'],
+    price: ['price'],
+    count: ['count'],
+    topping: ['toppings', item => item ? item : 'no toppings'],
+    choices: ['choices', item => item ? item : 'no choices'],
+};
 
-export const Order = ({ orders, setOrders, setOpenItem }) => {
+export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, firebaseDatabase }) => {
+    // const dataBase = firebaseDatabase();
+
+    const sendOrder = () => {
+        console.log( 'orders', orders);
+        const newOrders = orders.map(projection(rulesData));
+        console.log('newOrders', newOrders);
+    };
+    // Удаление товара
     const deleteItem = index => {
         const newOrders = orders.filter((item, i) => 
-        index !== i);
+            index !== i);
         setOrders(newOrders);
-    }
+    };
 
-    const total = orders.reduce((result, order)=> totalPriceItems(order) + result, 0);
+    const total = orders.reduce((result, order)=> 
+        totalPriceItems(order) + result, 0);
 
-    const totalCounter = orders.reduce((result, order)=> order.count + result, 0);
+    const totalCounter = orders.reduce((result, order) => 
+        order.count + result, 0);
         
 
     return (
@@ -82,7 +96,13 @@ export const Order = ({ orders, setOrders, setOpenItem }) => {
                 <span>{totalCounter}</span>
                 <TotalPrice>{formatCurrency(total)}</TotalPrice>
             </Total> 
-            <ModalBtn>Оформить</ModalBtn>
+            <ModalBtn onClick={() => {
+                if(authentication) {
+                    sendOrder();
+                } else {
+                    logIn();
+                }
+            }}>Оформить</ModalBtn>
         </OrderStyled>
     )
 }
