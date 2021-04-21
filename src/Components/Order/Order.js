@@ -49,17 +49,22 @@ const rulesData = {
     name: ['name'],
     price: ['price'],
     count: ['count'],
-    topping: ['toppings', item => item ? item : 'no toppings'],
-    choices: ['choices', item => item ? item : 'no choices'],
+    topping: ['topping', arr => arr.filter(obj => obj.checked).map(obj => obj.name),
+        arr => arr.length ? arr : `no topping`],
+    choice: ['choice', item => item ? item : 'no choices'],
 };
 
 export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, firebaseDatabase }) => {
-    // const dataBase = firebaseDatabase();
+    const dataBase = firebaseDatabase();
 
     const sendOrder = () => {
-        console.log( 'orders', orders);
-        const newOrders = orders.map(projection(rulesData));
-        console.log('newOrders', newOrders);
+        const newOrder = orders.map(projection(rulesData));
+        dataBase.ref('orders').push().set({
+            nameClient: authentication.displayName,
+            email: authentication.email,
+            order: newOrder
+        });
+        setOrders([]);
     };
     // Удаление товара
     const deleteItem = index => {
