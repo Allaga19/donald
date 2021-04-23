@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ModalBtn } from '../Style/Button';
 import { CountItem } from './CountItem';
@@ -9,6 +9,7 @@ import { Toppings } from '../Modal/Toppings';
 import { Choices } from '../Modal/Choices';
 import { useToppings } from '../Hooks/useToppings';
 import { useChoices} from '../Hooks/useChoices';
+import { Context } from '../Functions/context';
 
 
 export const Overlay = styled.div`
@@ -63,7 +64,11 @@ const TotalPriceItem = styled.div`
     justify-content: space-between;
 `;
 
-export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+export const ModalItem = () => {
+    const {
+        orders: { orders, setOrders },
+        openItem: { openItem, setOpenItem },
+    } = useContext(Context);
 
     const counter = UseCount(openItem.count);
     const toppings = useToppings(openItem);
@@ -117,30 +122,5 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
             </Modal>
         </Overlay>
     )
-    
-//    return (
-//         <Overlay id="overlay" onClick={closeModal}>
-//             <Modal>
-//                 <Banner img={openItem.img}/>
-//                 <ModalContent>
-//                     <ContentHeader>
-//                         <PriceName>{openItem.name}</PriceName>
-//                         <PriceNumber>{formatCurrency(openItem.price)}</PriceNumber>
-//                     </ContentHeader>
-//                     <CountItem {...counter}/>
-//                     {openItem.toppings && <Toppings {...toppings} />}
-//                     {openItem.choices && <Choices {...choices} openItem={openItem} />}
-//                     <TotalPriceItem>
-//                         <span>Цена:</span>
-//                         <span>{formatCurrency(totalPriceItems(order))}</span>
-//                     </TotalPriceItem>
-//                     <ModalBtn 
-//                         onClick={isEdit ? editOrder : addToOrder}
-//                         disabled={order.choices && !order.choice}
-//                         >{isEdit ? 'Редактировать' : 'Добавить'}</ModalBtn>
-//                 </ModalContent>
-//             </Modal>
-//         </Overlay>
-//     )
 }
    
