@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ModalBtn } from '../Style/Button';
 import { OrderListItem } from './../Order/OrderListItem';
-import { totalPriceItems } from '../Functions/secondaryFunction';
-import { formatCurrency } from '../Functions/secondaryFunction';
+import { totalPriceItems, formatCurrency } from '../Functions/secondaryFunction';
+import { Context } from '../Functions/context';
 
 
 const OrderStyled = styled.section`
@@ -45,14 +45,13 @@ const EmptyList = styled.p`
     text-align: center;
 `;
 
-export const Order = ({ 
-    orders, 
-    setOrders, 
-    setOpenItem, 
-    authentication, 
-    logIn,
-    setOpenOrderConfirm 
-}) => {
+export const Order = () => {
+
+    const { 
+        auth: { authentication, logIn },
+        orders: { orders, setOrders} ,
+        orderConfirm: { setOpenOrderConfirm },
+    } = useContext(Context);
 
     // Удаление товара
     const deleteItem = index => {
@@ -76,23 +75,27 @@ export const Order = ({
                         order={order}
                         deleteItem={deleteItem}
                         index={index}
-                        setOpenItem={setOpenItem}
                         />)}
                 </OrderList> :
                 <EmptyList>Список заказов пуст</EmptyList>}
             </OrderContent>
-            <Total>
-                <span>Итого</span>
-                <span>{totalCounter}</span>
-                <TotalPrice>{formatCurrency(total)}</TotalPrice>
-            </Total> 
-            <ModalBtn onClick={() => {
-                if(authentication) {
-                    setOpenOrderConfirm(true);
-                } else {
-                    logIn();
-                }
-            }}>Оформить</ModalBtn>
+            {orders.length ?
+                <>
+                    <Total>
+                        <span>Итого</span>
+                        <span>{totalCounter}</span>
+                        <TotalPrice>{formatCurrency(total)}</TotalPrice>
+                    </Total> 
+                    <ModalBtn onClick={() => {
+                        if(authentication) {
+                            setOpenOrderConfirm(true);
+                        } else {
+                            logIn();
+                        }
+                    }}>Оформить</ModalBtn>
+                </> :
+                null
+            }
         </OrderStyled>
     )
 }
